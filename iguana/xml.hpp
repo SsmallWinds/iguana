@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <functional>
 #include <cctype>
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 #include "reflection.hpp"
 
 #define IGUANA_XML_READER_CHECK_FORWARD if (l > length) return 0; work_ptr += l; length -= l

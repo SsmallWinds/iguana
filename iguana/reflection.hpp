@@ -347,6 +347,7 @@ MAKE_META_DATA(STRUCT_NAME, GET_ARG_COUNT(__VA_ARGS__), __VA_ARGS__)
     template<typename T>
     using Reflect_members = decltype(iguana_reflect_members(std::declval<T>()));
 
+    //利用 SFINAE， 判断 类型是否为可反射类型 https://blog.csdn.net/ding_yingzi/article/details/79983042
     template <typename T, typename = void>
     struct is_reflection : std::false_type
     {
@@ -457,7 +458,8 @@ MAKE_META_DATA(STRUCT_NAME, GET_ARG_COUNT(__VA_ARGS__), __VA_ARGS__)
 
         return std::distance(arr.begin(), it);
     }
-
+    
+    //c++17 折叠表达式（fold expression），用于可变参数模板展开
     template <class Tuple, class F, std::size_t...Is>
     void tuple_switch(std::size_t i, Tuple&& t, F&& f, std::index_sequence<Is...>) {
         ((i == Is && ((std::forward<F>(f)(std::get<Is>(std::forward<Tuple>(t)))), false)), ...);
